@@ -696,7 +696,7 @@ function ideasPrompt(shopArg) {
   const ideaExcl = [...shop.existingProducts, ...PRODUCTS.slice(-6).map(p => p.name)].join(', ');
   return 'Generate 8 NEW product ideas for this Etsy shop.\n'
     + 'Shop: "' + shop.shopName + '" | Niche: "' + shop.nicheName + '"\n'
-    + 'Type: ' + (shop.productType === 'pod' ? 'Print-on-demand only' : 'Digital downloads only') + '\n'
+    + 'Type: Digital downloads only\n'
     + 'Keywords: ' + (shop.topKeywords || []).slice(0, 5).join(', ') + '\n'
     + (ideaExcl ? 'Already selling these — suggest COMPLETELY different products: ' + ideaExcl + '\n' : '')
     + '\nFor each idea use this EXACT format:\n\n'
