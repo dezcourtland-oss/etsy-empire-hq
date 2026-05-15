@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>✨ Etsy Empire HQ ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --rose:#FF6FA6;--rose2:#FF9EC4;--lav:#C89EFF;--lav2:#E0C8FF;
+  --mint:#7EEECB;--mint2:#B6F5E2;--gold:#FFD166;
+  --bg:#0f0618;--surface:#180d25;--card:#201230;--border:#3a1d55;--border2:#5a3080;
+  --text:#FFF0F7;--muted:#b080c8;--dim:#6040a0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+
+#bar{
+  position:fixed;top:0;left:0;right:0;z-index:500;height:50px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 14px;
+  background:linear-gradient(90deg,#1a0628,#0f0618,#1a0628);
+  border-bottom:2px solid var(--rose);box-shadow:0 2px 14px rgba(255,111,166,.25);
+}
+.logo{font-family:'Press Start 2P',monospace;font-size:.4rem;line-height:1.7;
+  background:linear-gradient(135deg,var(--rose),var(--lav),var(--rose2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bar-mid{display:flex;gap:5px;align-items:center}
+.chip{padding:3px 9px;border-radius:12px;background:rgba(255,111,166,.1);border:1px solid rgba(255,111,166,.2);font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted)}
+.chip b{color:var(--rose2)}
+.shop-chip{padding:3px 12px;border-radius:12px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.25);font-size:.62rem;font-weight:800;color:var(--gold);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-right{display:flex;gap:6px;align-items:center}
+.bar-btn{padding:5px 12px;border-radius:12px;cursor:pointer;border:2px solid;font-family:'Nunito',sans-serif;font-size:.72rem;font-weight:800;transition:all .2s}
+.btn-k{background:rgba(200,158,255,.08);border-color:rgba(200,158,255,.28);color:var(--lav)}
+.btn-rst{background:rgba(255,111,166,.08);border-color:rgba(255,111,166,.28);color:var(--rose2)}
+.sdot{width:6px;height:6px;border-radius:50%;background:#333;display:inline-block;margin-right:4px;transition:all .3s}
+.sdot.on{background:var(--mint);box-shadow:0 0 7px var(--mint)}
+
+#sbar{
+  position:fixed;top:50px;left:0;right:0;z-index:490;height:26px;
+  padding:0 14px;display:flex;align-items:center;gap:8px;
+  background:rgba(126,238,203,.06);border-bottom:1px solid rgba(126,238,203,.15);
+  font-size:.66rem;color:var(--mint2);font-weight:700;overflow:hidden;
+}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--mint);flex-shrink:0}
+.ldot.p{animation:lp 1.3s ease-in-out infinite}
+@keyframes lp{0%,100%{box-shadow:0 0 0 0 rgba(126,238,203,.5)}50%{box-shadow:0 0 0 5px rgba(126,238,203,0)}}
+
+/* ── NICHE PICKER ── */
+#nichePicker{position:fixed;top:76px;left:0;right:0;bottom:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 24px;overflow-y:auto}
+.np-title{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--gold);line-height:1.8;text-align:center;margin-bottom:8px;margin-top:8px}
+.np-sub{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.6;max-width:480px}
+.np-spin{display:flex;flex-direction:column;align-items:center;gap:12px;padding:30px}
+.spinner{width:32px;height:32px;border:3px solid var(--border2);border-top-color:var(--rose);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.np-spin-txt{font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:center}
+.niche-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;width:100%;max-width:900px;margin-bottom:90px}
+.nc{background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:16px;cursor:pointer;transition:all .2s}
+.nc:hover{border-color:var(--rose2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(255,111,166,.15)}
+.nc.sel{border-color:var(--gold);background:rgba(255,209,102,.06)}
+.nc-top{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.nc-icon{font-size:1.6rem;flex-shrink:0}
+.nc-name{font-size:.82rem;font-weight:900;color:var(--text);line-height:1.3;margin-bottom:3px}
+.nc-meta{font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--mint2)}
+.nc-desc{font-size:.68rem;color:var(--muted);line-height:1.6;margin-bottom:7px}
+.nc-why{font-size:.62rem;color:var(--gold);font-style:italic;margin-bottom:8px}
+.nc-rev{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;padding:8px 0;border-top:1px solid var(--border)}
+.nc-rev-title{font-size:.5rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
+.nr-row{display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-radius:7px;background:rgba(126,238,203,.07);border:1px solid rgba(126,238,203,.15)}
+.nr-row.gold{background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.2)}
+.nr-l{font-size:.56rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.nr-v{font-size:.62rem;font-weight:900;color:var(--mint2)}
+.nr-row.gold .nr-v{color:var(--gold)}
+.nc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.nc-tag{font-size:.55rem;padding:2px 8px;background:rgba(200,158,255,.12);border-radius:8px;color:var(--lav2)}
+/* Confirm bar */
+.confirm-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
+  padding:12px 20px;background:var(--surface);border-top:2px solid var(--gold);
+  box-shadow:0 -4px 24px rgba(255,209,102,.15);
+  flex-direction:row;align-items:center;justify-content:space-between;gap:14px}
+.confirm-bar.show{display:flex}
+.cb-info{flex:1;min-width:0}
+.cb-name{font-size:.82rem;font-weight:900;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb-desc{font-size:.65rem;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cb-btns{display:flex;gap:8px;flex-shrink:0}
+.np-btn{padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--lav));border:none;color:#fff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .2s}
+.np-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,111,166,.4)}
+.np-btn.sec{background:transparent;border:2px solid var(--border2);color:var(--muted)}
+.np-btn.sec:hover{border-color:var(--muted);color:var(--text)}
+
+/* ── MAIN APP ── */
+#app{position:fixed;top:76px;left:0;right:0;bottom:0;display:none;flex-direction:row}
+#sidebar{width:200px;background:var(--surface);border-right:2px solid var(--border2);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sb-head{padding:10px 12px;border-bottom:1px solid var(--border);font-family:'Press Start 2P',monospace;font-size:.26rem;color:var(--gold);letter-spacing:.08em;line-height:1.8}
+.wc{padding:9px 11px;border-bottom:1px solid var(--border);cursor:pointer;transition:all .18s;border-left:3px solid transparent}
+.wc:hover{background:rgba(255,111,166,.05)}
+.wc.wk{background:rgba(126,238,203,.06);border-left-color:var(--mint)}
+.wc.dn{border-left-color:var(--lav)}
+.wc.er{border-left-color:var(--rose)}
+.wc-top{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+.wc-em{font-size:.95rem}
+.wc-nm{font-size:.68rem;font-weight:800;color:var(--text)}
+.wc-rl{font-size:.54rem;color:var(--muted);line-height:1.4}
+.wc-st{display:flex;align-items:center;gap:4px;font-size:.54rem;font-family:'JetBrains Mono',monospace;color:var(--dim);margin-top:3px}
+.wdot{width:5px;height:5px;border-radius:50%;background:var(--dim);flex-shrink:0}
+.wc-st.wk .wdot{background:var(--mint);animation:bl .8s ease infinite}
+.wc-st.dn .wdot{background:var(--lav2)}
+.wc-st.er .wdot{background:var(--rose)}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+
+#content{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.tabs{display:flex;border-bottom:2px solid var(--border2);background:rgba(255,255,255,.02);flex-shrink:0;overflow-x:auto}
+.tab{padding:10px 14px;font-size:.72rem;font-weight:800;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--rose2);border-bottom-color:var(--rose2)}
+.panel{flex:1;overflow-y:auto;padding:14px;display:none}
+.panel.on{display:block}
+
+/* ── PRODUCT GRID ── */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.pcard{background:var(--card);border:2px solid var(--border2);border-radius:13px;overflow:hidden;cursor:pointer;transition:all .2s}
+.pcard:hover{border-color:var(--rose2);transform:translateY(-3px);box-shadow:0 8px 20px rgba(255,111,166,.14)}
+.pc-img{width:100%;aspect-ratio:1;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:3.5rem}
+.pc-img.has-design{background:var(--border)}
+.pc-design-badge{position:absolute;bottom:6px;right:6px;background:var(--mint);color:#0f0618;font-size:.52rem;font-weight:800;padding:2px 7px;border-radius:8px}
+.pc-info{padding:9px 11px}
+.pc-name{font-size:.75rem;font-weight:800;color:var(--text);margin-bottom:2px;line-height:1.3}
+.pc-price{font-size:.68rem;color:var(--mint2);font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:4px}
+.pc-tag{font-size:.5rem;padding:2px 6px;background:rgba(200,158,255,.12);border-radius:7px;color:var(--lav2)}
+.pc-seo{font-size:.5rem;color:var(--mint);font-family:'JetBrains Mono',monospace}
+
+/* ── IDEA GRID ── */
+.idea-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px}
+.icard{background:var(--card);border:2px solid var(--border2);border-radius:12px;padding:13px;transition:all .2s}
+.icard:hover{border-color:var(--rose2)}
+.icard-icon{font-size:1.3rem;margin-bottom:5px}
+.icard-title{font-size:.75rem;font-weight:800;color:var(--text);margin-bottom:4px}
+.icard-desc{font-size:.65rem;color:var(--muted);line-height:1.6;margin-bottom:7px}
+.icard-kws{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px}
+.ikw{font-size:.52rem;padding:2px 7px;background:rgba(126,238,203,.1);border-radius:7px;color:var(--mint2)}
+.icard-bottom{display:flex;justify-content:space-between;align-items:center}
+.icard-price{font-size:.62rem;color:var(--gold);font-family:'JetBrains Mono',monospace}
+.make-btn{padding:5px 12px;border-radius:8px;background:var(--rose);border:none;color:#fff;font-size:.64rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
+.make-btn:hover{opacity:.85}
+
+/* ── ROOM CONTENT ── */
+.rc{background:var(--card);border:2px solid var(--border2);border-radius:12px;overflow:hidden;margin-bottom:10px}
+.rc-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:rgba(255,255,255,.02)}
+.rc-title{font-size:.76rem;font-weight:800;color:var(--text)}
+.rc-tog{color:var(--muted);transition:transform .2s}
+.rc-tog.o{transform:rotate(180deg)}
+.rc-body{padding:12px 14px;display:none}
+.rc-body.o{display:block}
+.rc-text{font-family:'JetBrains Mono',monospace;font-size:.68rem;line-height:1.9;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto}
+.rc-acts{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+.rcbtn{padding:6px 13px;border-radius:8px;border:2px solid var(--border2);background:0;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.7rem;font-weight:800;cursor:pointer;transition:all .2s}
+.rcbtn:hover{border-color:var(--lav2);color:var(--lav2)}
+.rcbtn.p{background:linear-gradient(135deg,var(--rose),var(--lav));border-color:transparent;color:#fff}
+.rcbtn.dl{border-color:var(--mint2);color:var(--mint2)}
+
+/* ── PRODUCT VIEWER ── */
+#pv{position:fixed;inset:0;z-index:700;background:var(--bg);display:none;flex-direction:column}
+#pv.open{display:flex}
+.pvbar{height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:2px solid var(--border2);background:rgba(255,111,166,.04);flex-shrink:0}
+.pvbar-title{font-size:.85rem;font-weight:900;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:10px}
+.pvbar-acts{display:flex;gap:7px;flex-shrink:0}
+.pvbtn{padding:6px 12px;border-radius:9px;border:2px solid var(--border2);background:0;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.7rem;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
+.pvbtn:hover{border-color:var(--lav2);color:var(--lav2)}
+.pvbtn.p{background:linear-gradient(135deg,var(--rose),var(--lav));border-color:transparent;color:#fff}
+.pvbtn.go{border-color:var(--gold);color:var(--gold)}
+.pvbtn.go:hover{background:rgba(255,209,102,.1)}
+.pvbtn.close{border-color:var(--rose2);color:var(--rose2)}
+
+/* Two-column layout */
+.pvbody{flex:1;display:grid;grid-template-columns:340px 1fr;overflow:hidden;min-height:0}
+@media(max-width:700px){.pvbody{grid-template-columns:1fr;overflow-y:auto}}
+
+/* Left panel */
+.pv-left{padding:16px;display:flex;flex-direction:column;gap:12px;border-right:2px solid var(--border2);overflow-y:auto}
+.pv-design-area{width:100%;aspect-ratio:1;border-radius:12px;background:var(--card);border:2px solid var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;position:relative;min-height:200px}
+.pv-design-area .design-icon{font-size:4rem}
+.pv-design-area .design-lbl{font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;padding:0 16px}
+.pv-design-area img{width:100%;height:100%;object-fit:cover;display:block}
+.design-btns{display:flex;flex-direction:column;gap:8px;width:100%}
+.design-btn{width:100%;padding:11px;border-radius:11px;border:none;font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-canva{background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff}
+.btn-canva:hover{opacity:.9;transform:translateY(-1px)}
+.btn-printify{background:linear-gradient(135deg,#00a693,#008577);color:#fff}
+.btn-printify:hover{opacity:.9;transform:translateY(-1px)}
+.printify-guide{background:rgba(0,166,147,.07);border:2px solid rgba(0,166,147,.2);border-radius:10px;padding:10px 12px;font-size:.63rem;color:#7EEECB;line-height:1.7}
+.printify-guide b{color:var(--mint2)}
+.printify-step{display:flex;gap:6px;margin-bottom:4px;align-items:flex-start}
+.pstep-n{width:16px;height:16px;border-radius:50%;background:var(--mint);color:#0f0618;font-size:.55rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* Right panel - listing */
+.pv-right{padding:16px;display:flex;flex-direction:column;gap:11px;overflow-y:auto}
+.pv-badges{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.pv-badge{font-size:.58rem;font-weight:800;padding:3px 10px;border-radius:9px;font-family:'JetBrains Mono',monospace}
+.badge-type{background:rgba(126,238,203,.12);color:var(--mint2)}
+.badge-niche{background:rgba(255,209,102,.1);color:var(--gold)}
+.badge-seo{background:rgba(200,158,255,.1);color:var(--lav2)}
+.field-group{display:flex;flex-direction:column;gap:5px}
+.fl{font-size:.62rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
+.fl-note{font-size:.55rem;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+.fv{background:var(--card);border:2px solid var(--border2);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.69rem;padding:9px 11px;width:100%;outline:none;transition:border-color .2s;resize:vertical;line-height:1.7}
+.fv:focus{border-color:var(--rose2)}
+.fv[readonly]{opacity:.8;cursor:default;resize:none}
+.fv.editable{border-color:var(--rose2) !important;background:rgba(255,111,166,.04) !important}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;background:var(--card);border:2px solid var(--border2);border-radius:8px;padding:8px 10px;min-height:42px}
+.tg{padding:3px 9px;background:rgba(255,111,166,.14);border:1px solid rgba(255,111,166,.28);border-radius:9px;font-size:.6rem;color:var(--rose2);cursor:pointer;user-select:none;transition:all .2s}
+.tg:hover{background:rgba(255,111,166,.3)}
+.pv-bottom-acts{display:flex;gap:8px;padding-top:4px;flex-shrink:0}
+.pv-copy-btn{flex:1;padding:12px;border-radius:11px;background:linear-gradient(135deg,var(--rose),var(--lav));border:none;color:#fff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .2s}
+.pv-copy-btn:hover{opacity:.9}
+.pv-dl-btn{padding:12px 16px;border-radius:11px;border:2px solid var(--mint2);background:0;color:var(--mint2);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .2s}
+.pv-dl-btn:hover{background:rgba(126,238,203,.1)}
+.pv-edit-btn{padding:12px 16px;border-radius:11px;border:2px solid var(--lav2);background:0;color:var(--lav2);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .2s}
+.pv-edit-btn:hover{background:rgba(200,158,255,.1)}
+
+/* ── EMPTY ── */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:260px;text-align:center;color:var(--muted)}
+.empty-icon{font-size:2.2rem}
+.empty-title{font-size:.82rem;font-weight:800;color:var(--text)}
+.empty-sub{font-size:.7rem;line-height:1.6;max-width:320px}
+
+/* ── MODALS ── */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);z-index:900;align-items:center;justify-content:center}
+.ov.open{display:flex}
+.modal{background:var(--surface);border:2px solid var(--rose2);border-radius:20px;padding:26px;width:90%;max-width:460px;animation:mp .28s cubic-bezier(.34,1.56,.64,1)}
+@keyframes mp{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.modal h3{font-size:.9rem;font-weight:900;background:linear-gradient(135deg,var(--rose2),var(--lav2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.modal p{font-size:.76rem;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.cost-note{background:rgba(255,209,102,.08);border:2px solid rgba(255,209,102,.2);border-radius:9px;padding:9px 11px;margin-bottom:10px;font-size:.68rem;color:var(--gold);line-height:1.65}
+.modal a{display:block;text-align:center;color:var(--rose2);font-size:.73rem;font-weight:800;margin-bottom:10px}
+.minput{width:100%;background:var(--card);border:2px solid var(--border2);border-radius:9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:.82rem;padding:9px 11px;outline:none;margin-bottom:9px;transition:border-color .2s}
+.minput:focus{border-color:var(--rose2)}
+.mbtns{display:flex;gap:7px;justify-content:flex-end}
+.mbtns button{padding:9px 18px;border-radius:11px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;border:2px solid;transition:all .2s}
+.mb-c{background:0;border-color:var(--border2);color:var(--muted)}
+.mb-s{background:linear-gradient(135deg,var(--rose),var(--lav));border-color:transparent;color:#fff}
+
+.spin-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(126,238,203,.07);border:2px solid rgba(126,238,203,.18);border-radius:9px;font-size:.68rem;font-weight:800;color:var(--mint2)}
+.spin{width:12px;height:12px;border:2px solid rgba(126,238,203,.22);border-top-color:var(--mint);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0}
+
+.vibe-opt{padding:10px 8px;border-radius:9px;border:2px solid var(--border2);cursor:pointer;font-size:.62rem;font-weight:700;color:var(--muted);text-align:center;line-height:1.5;transition:all .2s}
+.vibe-opt:hover{border-color:var(--rose2);color:var(--text)}
+.vibe-opt.picked{border-color:var(--gold)!important;background:rgba(255,209,102,.08)!important;color:var(--gold)!important}
+.etsy-btn{padding:5px 12px;border-radius:10px;border:2px solid rgba(255,111,166,.4);background:rgba(255,111,166,.08);color:var(--rose2);font-family:'Nunito',sans-serif;font-size:.72rem;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
+.etsy-btn:hover{border-color:var(--rose2);background:rgba(255,111,166,.15)}
+.etsy-btn.connected{border-color:var(--mint2);background:rgba(126,238,203,.08);color:var(--mint2)}
+.etsy-btn.posting{opacity:.6;cursor:not-allowed}
+.etsy-badge{font-size:.52rem;padding:2px 7px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:800}
+.etsy-badge.live{background:rgba(126,238,203,.15);color:var(--mint2)}
+.etsy-badge.draft{background:rgba(255,209,102,.12);color:var(--gold)}
+.etsy-badge.error{background:rgba(255,111,166,.12);color:var(--rose2)}
+.toast{position:fixed;bottom:14px;right:14px;background:linear-gradient(135deg,var(--rose),var(--lav));color:#fff;padding:10px 16px;border-radius:11px;font-weight:800;font-size:.72rem;z-index:9999;transform:translateY(50px);opacity:0;transition:all .3s;max-width:320px;line-height:1.5}
+.toast.show{transform:translateY(0);opacity:1}
+
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div id="bar">
+  <div class="logo">🎀 ETSY EMPIRE HQ</div>
+  <div class="bar-mid">
+    <div class="chip">🛍 <b id="sProd">0</b> products</div>
+    <div class="chip">💡 <b id="sIdea">0</b> ideas</div>
+    <div class="chip">🔁 Cycle <b id="sCyc">0</b></div>
+    <div class="chip">⏰ Next: <b id="sN">—</b></div>
+    <div class="shop-chip" id="shopChip">🔍 No shop yet</div>
+  </div>
+  <div class="bar-right">
+    <span class="sdot" id="sDot"></span>
+    <button class="etsy-btn" id="etsyConnectBtn" onclick="openEtsyModal()">🛍 Connect Etsy</button>
+    <button class="bar-btn btn-k" onclick="openKeyModal()">🔑 API Key</button>
+    <button class="bar-btn btn-rst" onclick="resetAll()">🔄 Change Niche</button>
+  </div>
+</div>
+
+<div id="sbar">
+  <div class="ldot" id="ldot"></div>
+  <span id="stxt">Connect your API key to start!</span>
+</div>
+
+<!-- NICHE PICKER -->
+<div id="nichePicker">
+  <div class="np-title">🔍 FIND YOUR SHOP NICHE</div>
+  <div class="np-sub">Research scans Etsy for trending profitable niches. Pick one and your workers build an entire shop around it forever.</div>
+  <div id="npState">
+    <div class="np-spin">
+      <div class="spinner"></div>
+      <div class="np-spin-txt">Connect your API key to start research!</div>
+    </div>
+  </div>
+  <div class="confirm-bar" id="confirmBar">
+    <div class="cb-info">
+      <div class="cb-name" id="cbName">—</div>
+      <div class="cb-desc" id="cbDesc">—</div>
+    </div>
+    <div class="cb-btns">
+      <button class="np-btn sec" onclick="deselectNiche()">← Back</button>
+      <button class="np-btn" onclick="confirmNiche()">✅ Lock In Niche!</button>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND SETUP (shown after niche picked, before app) -->
+<div id="brandSetup" style="display:none;position:fixed;top:76px;left:0;right:0;bottom:0;background:var(--bg);z-index:99;overflow-y:auto">
+  <div style="max-width:620px;margin:0 auto;padding:28px 20px">
+    <div style="font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--gold);line-height:1.8;text-align:center;margin-bottom:8px">🎨 SET UP YOUR SHOP</div>
+    <div style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:24px;line-height:1.6">Name your shop and pick your brand style — this shapes every product your workers create.</div>
+
+    <!-- Shop Name -->
+    <div style="background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:18px;margin-bottom:14px">
+      <div style="font-size:.78rem;font-weight:800;color:var(--text);margin-bottom:4px">🏪 Shop Name</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-bottom:10px">We suggested one — edit it or type your own. Keep it short and memorable.</div>
+      <input id="bs-shopname" class="minput" style="margin-bottom:6px" placeholder="e.g. BloomPrintCo"/>
+      <div style="font-size:.6rem;color:var(--dim)">Tip: 1-3 words, no spaces, Etsy allows letters + numbers only</div>
+    </div>
+
+    <!-- Product Type -->
+    <div style="background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:18px;margin-bottom:14px">
+      <div style="font-size:.78rem;font-weight:800;color:var(--text);margin-bottom:4px">📦 Product Type</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-bottom:10px">AI suggested the best fit — confirm or switch.</div>
+      <div style="display:flex;gap:10px">
+        <div id="bs-digital" onclick="selectType('digital')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--border2);cursor:pointer;transition:all .2s;text-align:center">
+          <div style="font-size:1.3rem;margin-bottom:4px">📥</div>
+          <div style="font-size:.72rem;font-weight:800;color:var(--text)">Digital Downloads</div>
+          <div style="font-size:.58rem;color:var(--muted);line-height:1.4;margin-top:3px">Planners, templates, printables. Instant delivery. No inventory ever.</div>
+        </div>
+        <div id="bs-pod" onclick="selectType('pod')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--border2);cursor:pointer;transition:all .2s;text-align:center">
+          <div style="font-size:1.3rem;margin-bottom:4px">🖨</div>
+          <div style="font-size:.72rem;font-weight:800;color:var(--text)">Print-on-Demand</div>
+          <div style="font-size:.58rem;color:var(--muted);line-height:1.4;margin-top:3px">T-shirts, mugs, wall art. Printify ships everything. No inventory ever.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand Style -->
+    <div style="background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:18px;margin-bottom:14px">
+      <div style="font-size:.78rem;font-weight:800;color:var(--text);margin-bottom:4px">🎨 Brand Aesthetic</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-bottom:10px">Pick the visual vibe for your shop. This feeds directly into every product design and logo.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px" id="bs-vibes">
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Soft & Feminine — pastel pinks, florals, gold accents, elegant serif fonts">🌸 Soft & Feminine</div>
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Bold & Modern — high contrast, clean sans-serif, geometric shapes, minimal">⚡ Bold & Modern</div>
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Earthy & Organic — warm neutrals, botanical illustrations, handwritten fonts">🌿 Earthy & Organic</div>
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Dark & Moody — deep jewel tones, gold, luxurious, editorial feel">🖤 Dark & Moody</div>
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Bright & Playful — vibrant colors, fun illustrations, rounded fonts, joyful">🎉 Bright & Playful</div>
+        <div class="vibe-opt" onclick="pickVibe(this)" data-vibe="Clean & Minimal — white space, muted palette, thin lines, professional">🤍 Clean & Minimal</div>
+      </div>
+    </div>
+
+    <!-- Brand Colors -->
+    <div style="background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:18px;margin-bottom:14px">
+      <div style="font-size:.78rem;font-weight:800;color:var(--text);margin-bottom:4px">🎨 Brand Colors <span style="font-size:.6rem;font-weight:400;color:var(--muted)">(optional — leave blank to auto-generate)</span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="flex:1">
+          <div style="font-size:.6rem;color:var(--muted);margin-bottom:4px">Primary</div>
+          <input id="bs-col1" class="minput" placeholder="#FF6FA6" style="margin-bottom:0;font-family:'JetBrains Mono',monospace"/>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:.6rem;color:var(--muted);margin-bottom:4px">Secondary</div>
+          <input id="bs-col2" class="minput" placeholder="#FFF0F7" style="margin-bottom:0;font-family:'JetBrains Mono',monospace"/>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:.6rem;color:var(--muted);margin-bottom:4px">Accent</div>
+          <input id="bs-col3" class="minput" placeholder="#4A0030" style="margin-bottom:0;font-family:'JetBrains Mono',monospace"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo section -->
+    <div style="background:var(--card);border:2px solid var(--border2);border-radius:14px;padding:18px;margin-bottom:20px" id="bs-logo-section">
+      <div style="font-size:.78rem;font-weight:800;color:var(--text);margin-bottom:4px">✨ Shop Logo <span style="font-size:.6rem;font-weight:400;color:var(--mint2)">(generated by Canva)</span></div>
+      <div style="font-size:.65rem;color:var(--muted);margin-bottom:12px">After you confirm, Claude will generate logo options for you right here in the chat using Canva — pick your favorite and download it.</div>
+      <div style="background:rgba(139,92,246,.08);border:2px solid rgba(139,92,246,.2);border-radius:9px;padding:10px 12px;font-size:.64rem;color:var(--lav2);line-height:1.7">
+        🎨 Logo generation happens in the Claude chat after you click Launch — look for logo options appearing below this app window!
+      </div>
+    </div>
+
+    <!-- Launch button -->
+    <button onclick="launchShop()" style="width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--rose),var(--lav));border:none;color:#fff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(255,111,166,.35)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+      🚀 Launch My Shop!
+    </button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div id="sidebar">
+    <div class="sb-head">🏢 YOUR TEAM</div>
+    <div id="workerList"></div>
+    <div style="padding:10px 11px;border-top:1px solid var(--border);margin-top:auto">
+      <button onclick="runAllNow()" style="width:100%;padding:8px;border-radius:9px;border:2px solid var(--border2);background:0;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.68rem;font-weight:800;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--lav2)';this.style.color='var(--lav2)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--muted)'">
+        🚀 Run All Workers Now
+      </button>
+    </div>
+  </div>
+  <div id="content">
+    <div class="tabs">
+      <div class="tab on" onclick="showTab('products')">🛍 Products</div>
+      <div class="tab" onclick="showTab('ideas')">💡 Ideas</div>
+      <div class="tab" onclick="showTab('brand')">🎨 Brand</div>
+    </div>
+    <div class="panel on" id="panel-products"><div id="errPanel" style="display:none;background:rgba(255,111,166,.08);border:2px solid var(--rose);border-radius:12px;padding:14px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--rose2);line-height:1.7"></div>
+    <div class="prod-grid" id="prodGrid"></div></div>
+    <div class="panel" id="panel-ideas"><div class="idea-grid" id="ideaGrid"></div></div>
+    <div class="panel" id="panel-brand">
+      <div id="brand-logo-section" style="background:var(--card);border:2px solid var(--border2);border-radius:13px;padding:16px;margin-bottom:14px;display:none">
+        <div style="font-size:.8rem;font-weight:800;color:var(--text);margin-bottom:6px">🎨 Shop Logo</div>
+        <div style="font-size:.68rem;color:var(--muted);line-height:1.6;margin-bottom:12px">Generate a professional logo for your shop name using Canva. Click below and I'll create logo options right here in the chat!</div>
+        <div id="brand-logo-brief" style="background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--lav2);line-height:1.7;margin-bottom:10px;display:none"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button onclick="generateLogo()" style="padding:10px 18px;border-radius:11px;background:linear-gradient(135deg,#8B5CF6,#EC4899);border:none;color:#fff;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">✨ Generate Logo in Canva</button>
+          <button onclick="copyLogoBrief()" style="padding:10px 18px;border-radius:11px;border:2px solid var(--lav2);background:0;color:var(--lav2);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer" id="copyLogoBriefBtn" onmouseover="this.style.background='rgba(200,158,255,.1)'" onmouseout="this.style.background='0'">📋 Copy Logo Brief</button>
+        </div>
+      </div>
+      <div id="cnt-brand"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT VIEWER -->
+<div id="pv">
+  <div class="pvbar">
+    <div class="pvbar-title" id="pvTitle">Product</div>
+    <div class="pvbar-acts">
+      <button class="pvbtn go" onclick="openInCanva()">✨ Open in Canva</button>
+      <button class="pvbtn p" onclick="copyListing()">📋 Copy Listing</button>
+      <button class="pvbtn" onclick="manualPostToEtsy()" id="pvEtsyBtn" style="border-color:var(--rose2);color:var(--rose2)">🛍 Post to Etsy</button>
+      <button class="pvbtn" onclick="downloadListing()" style="border-color:var(--mint2);color:var(--mint2)">⬇ Download</button>
+      <button class="pvbtn" onclick="toggleEdit()" id="editBtn">✏️ Edit</button>
+      <button class="pvbtn close" onclick="closePV()">✕ Close</button>
+    </div>
+  </div>
+  <div class="pvbody">
+    <!-- LEFT: Design area -->
+    <div class="pv-left">
+      <div class="pv-design-area" id="pvDesignArea">
+        <div class="design-icon" id="pvDesignIcon">🛍</div>
+        <div class="design-lbl">No design yet — use Canva to create your actual product image!</div>
+      </div>
+      <div class="design-btns">
+        <button class="design-btn btn-canva" onclick="openInCanva()">
+          ✨ Design in Canva (Free!)
+        </button>
+        <button class="design-btn btn-printify" onclick="openPrintify()">
+          🖨 Create on Printify (POD)
+        </button>
+      </div>
+      <div class="printify-guide" id="printifyGuide">
+        <b>📋 How to use Printify:</b><br>
+        <div class="printify-step"><span class="pstep-n">1</span><span>Go to printify.com → Create product</span></div>
+        <div class="printify-step"><span class="pstep-n">2</span><span>Search for the product type below</span></div>
+        <div class="printify-step"><span class="pstep-n">3</span><span>Upload your Canva design as print file</span></div>
+        <div class="printify-step"><span class="pstep-n">4</span><span>Set price → Sync to Etsy automatically!</span></div>
+        <div class="printify-step"><span class="pstep-n">5</span><span>Paste listing text from here into Etsy</span></div>
+        <div id="pvPrintifyProduct" style="margin-top:8px;padding:6px 8px;background:rgba(0,166,147,.1);border-radius:6px;font-size:.6rem"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Full listing text -->
+    <div class="pv-right">
+      <div class="pv-badges">
+        <span class="pv-badge badge-type" id="pvTypeBadge">Digital</span>
+        <span class="pv-badge badge-niche" id="pvNicheBadge">Niche</span>
+        <span class="pv-badge badge-seo" id="pvSeoBadge">SEO</span>
+      </div>
+      <div class="field-group">
+        <div class="fl">Product Name</div>
+        <input class="fv" id="f-name" readonly/>
+      </div>
+      <div class="field-group">
+        <div class="fl">Etsy Title <span class="fl-note" id="titleLen">0/140 chars</span></div>
+        <input class="fv" id="f-title" readonly maxlength="140"/>
+      </div>
+      <div class="field-group">
+        <div class="fl">SEO Keywords in Title</div>
+        <input class="fv" id="f-seo" readonly/>
+      </div>
+      <div class="field-group">
+        <div class="fl">Price</div>
+        <input class="fv" id="f-price" readonly style="max-width:160px"/>
+      </div>
+      <div class="field-group">
+        <div class="fl">Description <span class="fl-note">SEO-optimized — paste into Etsy description field</span></div>
+        <textarea class="fv" id="f-desc" readonly rows="9"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="fl">Tags <span class="fl-note">Click any tag to copy individually</span></div>
+        <div class="tag-row" id="f-tags"></div>
+      </div>
+      <div class="field-group">
+        <div class="fl" id="lbl-materials">File Details</div>
+        <textarea class="fv" id="f-materials" readonly rows="2"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="fl">Etsy Category</div>
+        <input class="fv" id="f-category" readonly/>
+      </div>
+      <div class="field-group">
+        <div class="fl">Upsell / Bundle Idea</div>
+        <textarea class="fv" id="f-upsell" readonly rows="2"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="fl">Canva Design Brief <span class="fl-note">Use this prompt in Canva AI to design the product</span></div>
+        <textarea class="fv" id="f-canva" readonly rows="3" style="border-color:rgba(139,92,246,.4);color:var(--lav2)"></textarea>
+      </div>
+      <div class="pv-bottom-acts" id="pvActsRow">
+        <button class="pv-edit-btn" onclick="toggleEdit()" id="editBtn2">✏️ Edit Mode</button>
+        <button class="pv-dl-btn" onclick="downloadListing()">⬇ Download</button>
+        <button class="pv-copy-btn" onclick="copyListing()">📋 Copy Full Listing</button>
+      </div>
+      <div id="saveRow" style="display:none">
+        <button class="pv-copy-btn" onclick="saveEdits()">💾 Save Edits</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ETSY CONNECT MODAL -->
+<div class="ov" id="etsyOv">
+  <div class="modal">
+    <h3>🛍 Connect Your Etsy Shop</h3>
+    <p>Enter your server URL from Render. Workers will post every new listing directly to your Etsy shop as a draft — you review and publish inside Etsy.</p>
+    <div style="background:rgba(126,238,203,.07);border:2px solid rgba(126,238,203,.2);border-radius:9px;padding:10px 12px;margin-bottom:12px;font-size:.67rem;color:var(--mint2);line-height:1.7">
+      ✅ Listings always go as <strong>drafts</strong> — nothing publishes without your approval inside Etsy Shop Manager.
+    </div>
+    <label style="font-size:.62rem;font-weight:800;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em">Your Render Server URL</label>
+    <input class="minput" id="serverUrlIn" placeholder="https://etsy-empire-server.onrender.com" type="url"/>
+    <div id="etsyStatusMsg" style="font-size:.66rem;color:var(--muted);margin-bottom:10px;min-height:18px;font-family:JetBrains Mono,monospace"></div>
+    <div class="mbtns">
+      <button class="mb-c" onclick="closeEtsyModal()">Cancel</button>
+      <button class="mb-s" onclick="testAndSaveServer()">Connect & Test 🔌</button>
+    </div>
+  </div>
+</div>
+
+<!-- KEY MODAL -->
+<div class="ov" id="keyOv">
+  <div class="modal">
+    <h3>🔑 Anthropic API Key</h3>
+    <div class="cost-note">💰 ~$0.10 per full run. <strong>$5 free credit on signup = ~50 free runs!</strong><br>Only AI API that works directly from a browser file.</div>
+    <a href="https://console.anthropic.com" target="_blank">👉 Get free key at console.anthropic.com</a>
+    <input type="password" class="minput" id="keyIn" placeholder="sk-ant-..."/>
+    <div class="mbtns">
+      <button class="mb-c" onclick="closeKeyModal()">Cancel</button>
+      <button class="mb-s" onclick="saveKey()">Connect! 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE NICHE CONFIRM MODAL -->
+<div class="ov" id="confirmResetOv">
+  <div class="modal">
+    <h3>🔄 Change Niche?</h3>
+    <p>This will clear your current niche, all products, and ideas so you can pick a brand new niche.</p>
+    <p style="color:var(--mint2);font-size:.72rem;font-weight:800">✅ Your API key stays saved — you won't need to re-enter it.</p>
+    <div class="mbtns" style="margin-top:16px">
+      <button class="mb-c" onclick="document.getElementById('confirmResetOv').classList.remove('open')">Cancel</button>
+      <button class="mb-s" onclick="doReset()">Yes, Change Niche 🔄</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+
+
+// ═══════════════════════════════════════════════════════════════
+//  ETSY EMPIRE HQ — Clean Core Script
+//  Workers: Product Studio, Idea Generator, Brand Room
+//  Flow: Niche Research → Brand Setup → Auto-generating Shop
+// ═══════════════════════════════════════════════════════════════
+
+// ── STATE ──────────────────────────────────────────────────────
+let KEY      = localStorage.getItem('v11_key') || '';
+let SHOP     = JSON.parse(localStorage.getItem('v11_shop') || 'null');
+let PRODUCTS = JSON.parse(localStorage.getItem('v11_prods') || '[]');
+let IDEAS    = JSON.parse(localStorage.getItem('v11_ideas') || '[]');
+let BRAND    = localStorage.getItem('v11_brand') || '';
+let CYCLE    = parseInt(localStorage.getItem('v11_cycle') || '0');
+
+let SERVER_URL  = localStorage.getItem('v11_server') || '';
+let isRunning  = false;
+let nextTimer  = null;
+let countInt   = null;
+let selNiche   = null;
+let bsType     = null;
+let bsVibe     = null;
+let curProd    = null;
+let editMode   = false;
+
+const WORKERS = [
+  { id:'products', name:'PRODUCT STUDIO', emoji:'🛍', color:'#E8B4F8', role:'Creates 3 complete listings per cycle' },
+  { id:'ideas',    name:'IDEA GENERATOR', emoji:'💡', color:'#FFD166', role:'Generates 8 new product ideas per cycle' },
+  { id:'brand',    name:'BRAND ROOM',     emoji:'🎨', color:'#55EFC4', role:'Shop identity — runs once at launch' },
+];
+const wStatus = { products:'idle', ideas:'idle', brand:'idle' };
+
+// ── SAVE / LOAD ─────────────────────────────────────────────────
+function saveAll() {
+  try {
+    localStorage.setItem('v11_prods', JSON.stringify(PRODUCTS));
+    localStorage.setItem('v11_ideas', JSON.stringify(IDEAS));
+    localStorage.setItem('v11_cycle', String(CYCLE));
+  } catch(e) { console.warn('Save failed:', e); }
+}
+
+// ── PROMPTS ─────────────────────────────────────────────────────
+
+function nichePrompt() {
+  // TheChartLab niche is permanently locked — no research needed
+  // This function exists for compatibility but is never called
+  return '';
+}
+
+// TheChartLab shop configuration — locked permanently
+function getShopConfig() {
+  return {
+    nicheName:   'Digital Trading Tools & Journals for Day Traders',
+    shopName:    'TheChartLab',
+    productType: 'digital',
+    targetBuyer: 'active day traders, swing traders, futures and forex traders',
+    icon:        '📊',
+    brandVibe:   'Professional & Clean — dark charcoal or navy background, bold white and gold accents, data-driven aesthetic, sharp modern typography',
+    brandColors: '#1a1a2e,#FFD166,#FFFFFF',
+    topKeywords: [
+      'trading journal', 'day trader tools', 'trade tracker PDF',
+      'futures trading journal', 'options trading journal',
+      'forex trading planner', 'stock market journal',
+      'trading log printable', 'trading performance tracker',
+      'trader discipline worksheet'
+    ],
+    existingProducts: [
+      'Forex Session Planner', 'Monthly Trading Goals Planner',
+      'Daily Trading Journal', 'Trade Performance Tracker',
+      'Futures Trader Starter Bundle', 'Risk Management Worksheet',
+      'Trading Strategy Cheat Sheet', 'Pre-Market Trading Planner',
+      'Opening Range Breakout Trading Journal', 'Complete Day Trader Bundle',
+      'Trading Mistake Tracker', 'Trader Mindset Affirmations Poster',
+      'Swing Trading Journal', 'Options Trading Journal',
+      'Options Greeks Quick Reference Card', '90 Day Trading Challenge Tracker',
+      'Weekly Trading Review Journal', 'Forex Trading Journal',
+      'Pre-Market Trading Planner Stock Market', 'Forex Trader Bundle'
+    ],
+  };
+}
+
+
+function productPrompt(shopArg, existingArg, n) {
+  // Always use TheChartLab config regardless of what's passed
+  const shop     = getShopConfig();
+  const existing = existingArg || [];
+  const isPOD  = shop.productType === 'pod';
+  const allExcl = [...shop.existingProducts, ...existing.map(p => p.name)].slice(-15).join(', ');
+  const vibe   = shop.brandVibe   || 'clean professional elegant';
+  const colors = shop.brandColors || '#FF6FA6,#FFF0F7,#4A0030';
+  const price  = isPOD ? '22-38' : '4-14';
+
+  const typeBlock = isPOD
+    ? 'PRINTIFY_PRODUCT: [exact Printify product type e.g. Unisex Staple T-Shirt]\nPRINT_DESIGN: [describe the print: text, colors, layout, graphics, style]'
+    : 'PAGES: [number of pages e.g. 12 pages]\nFILE_FORMAT: [e.g. PDF + PNG, A4 + US Letter sizes]';
+
+  return 'You are an Etsy SEO expert specializing in trading and finance products.\n'
+    + 'Create ONE complete digital download PDF listing for TheChartLab Etsy shop.\n'
+    + 'Shop: "' + shop.shopName + '" | Niche: "' + shop.nicheName + '"\n'
+    + 'Target buyer: ' + shop.targetBuyer + '\n'
+    + 'Top keywords: ' + (shop.topKeywords || []).slice(0, 5).join(', ') + '\n'
+    + 'Brand style: ' + vibe + ' | Brand colors: ' + colors + '\n'
+    + (allExcl ? 'Do NOT create any of these (already exist): ' + allExcl + '\n' : '')
+    + '\nRules: No AI prompt bundles. No generic PDFs. Must be an original, useful, specific product.\n'
+    + '\nReply in EXACTLY this format — fill in every single field, no skipping:\n\n'
+    + '===PRODUCT===\n'
+    + 'NAME: [specific product name]\n'
+    + 'TITLE: [Etsy title, aim for 130-140 characters, naturally include 5+ keywords]\n'
+    + 'KEYWORDS: [5 keywords from the title, comma separated]\n'
+    + 'PRICE: $[' + price + ']\n'
+    + 'ICON: [one emoji that represents this product]\n'
+    + 'COLORS: [3 hex color codes that match the brand, e.g. #FFE4E1,#FF6FA6,#2C1810]\n'
+    + typeBlock + '\n'
+    + 'DESCRIPTION:\n'
+    + '[Write 80-100 words. Paragraph 1 (30w): Open with the main keyword in the first sentence, describe what this product is and who it is for. Paragraph 2 (40w): List everything included, specific features, what makes it special. Paragraph 3 (30w): Format details, how to use, instant download or shipping note, call to action.]\n'
+    + 'TAGS: [List exactly 13 Etsy tags, comma separated. Mix single-word and long-tail phrases. Use real buyer search terms.]\n'
+    + 'CATEGORY: [Full Etsy category path, e.g. Paper and Party Supplies > Paper > Stationery]\n'
+    + 'UPSELL: [One specific bundle idea using other products in the same niche]\n'
+    + 'CANVA_BRIEF: [Write 2-3 sentences for Canva AI. This is a professional trading PDF tool. Sentence 1: describe exactly what to design (product type, all pages/sections to include). Sentence 2: specify colors ' + colors + ', visual style "' + vibe + '", typography mood, any icons or illustrations. Sentence 3: layout details and niche context "' + shop.nicheName + '" so it looks professional and ready to sell on Etsy.]\n'
+    + '===END===';
+}
+
+function ideasPrompt(shopArg) {
+  const shop    = getShopConfig();
+  const ideaExcl = [...shop.existingProducts, ...PRODUCTS.slice(-6).map(p => p.name)].join(', ');
+  return 'Generate 8 NEW product ideas for this Etsy shop.\n'
+    + 'Shop: "' + shop.shopName + '" | Niche: "' + shop.nicheName + '"\n'
+    + 'Type: ' + (shop.productType === 'pod' ? 'Print-on-demand only' : 'Digital downloads only') + '\n'
+    + 'Keywords: ' + (shop.topKeywords || []).slice(0, 5).join(', ') + '\n'
+    + (ideaExcl ? 'Already selling these — suggest COMPLETELY different products: ' + ideaExcl + '\n' : '')
+    + '\nFor each idea use this EXACT format:\n\n'
+    + '---IDEA1---\n'
+    + 'TITLE: [product name]\n'
+    + 'ICON: [one emoji]\n'
+    + 'DESC: [2 sentences: what it is and why it will sell in this niche]\n'
+    + 'KEYWORDS: [5 buyer search terms, comma separated]\n'
+    + 'PRICE: $[suggested price]\n'
+    + 'DIFFICULTY: [Easy / Medium / Hard to create]\n'
+    + '---END1---\n\n'
+    + '[Repeat for IDEA2 through IDEA8]';
+}
+
+function brandPrompt(shop) {
+  return 'Create a complete brand identity for this Etsy shop.\n'
+    + 'Shop name: "' + shop.shopName + '" | Niche: "' + shop.nicheName + '"\n'
+    + 'Target buyer: ' + shop.targetBuyer + '\n'
+    + 'Brand style: ' + (shop.brandVibe || 'clean professional elegant') + '\n'
+    + 'Brand colors: ' + (shop.brandColors || '#FF6FA6,#FFF0F7,#4A0030') + '\n\n'
+    + 'Reply with ALL of the following:\n\n'
+    + 'SHOP_NAMES:\n'
+    + '1. [name] — [why it works for this niche]\n'
+    + '2. [name] — [why]\n3. [name] — [why]\n4. [name] — [why]\n5. [name] — [why]\n'
+    + 'RECOMMENDED: [which name and exactly why]\n\n'
+    + 'BRAND_TAGLINE: [under 8 words that capture the shop perfectly]\n\n'
+    + 'SHOP_ANNOUNCEMENT:\n'
+    + '[130 words max. Friendly opening, what the shop sells, current offer or bestseller mention, clear CTA to browse]\n\n'
+    + 'ABOUT_SECTION:\n'
+    + '[220 words. Relatable founder story, what problem this shop solves, what makes products special, warm invitation to shop]\n\n'
+    + 'LOGO_BRIEF:\n'
+    + '[3 sentences for Canva AI to design a logo. Include: shop name to display, brand colors ' + (shop.brandColors || '') + ', style "' + (shop.brandVibe || '') + '", what icon or symbol to include, typography mood, overall feel for an Etsy shop logo]\n\n'
+    + 'POLICIES:\n'
+    + 'Refunds: [1-2 sentences, Etsy compliant]\n'
+    + 'Processing: [1 sentence — digital = instant, POD = 5-7 business days]\n'
+    + 'FAQ:\n'
+    + 'Q: [most common question for this niche] A: [answer]\n'
+    + 'Q: A:\nQ: A:';
+}
+
+// ── API CALL ────────────────────────────────────────────────────
+async function callAI(prompt, maxTokens) {
+  const tokens = maxTokens || 900;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-calls': 'true',
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: tokens,
+      messages: [{ role: 'user', content: prompt }],
+    }),
+  });
+
+  if (!res.ok) {
+    let msg = 'HTTP ' + res.status;
+    try { const j = await res.json(); msg = j.error?.message || msg; } catch(_) {}
+    throw new Error(msg);
+  }
+
+  const data = await res.json();
+  return data.content?.[0]?.text || '';
+}
+
+const delay = ms => new Promise(r => setTimeout(r, ms));
+
+// ── PARSERS ─────────────────────────────────────────────────────
+function parseNiches(text) {
+  const niches = [];
+  for (let i = 1; i <= 6; i++) {
+    const s = text.indexOf('===N' + i + '===');
+    const e = text.indexOf('===END' + i + '===');
+    if (s < 0) continue;
+    const blk = text.slice(s, e > s ? e : s + 800);
+    const g = k => { const m = blk.match(new RegExp('^' + k + ':\\s*(.+)$', 'mi')); return m ? m[1].trim() : ''; };
+    const name = g('NAME');
+    if (!name) continue;
+    niches.push({
+      name, icon: g('ICON') || '🛍', type: g('TYPE') || 'digital',
+      desc: g('DESC'), why: g('WHY'), shopName: g('SHOP'),
+      targetBuyer: g('BUYER'), avgPrice: g('PRICE'), competition: g('COMPETITION'),
+      marketGap: g('MARKET_GAP'),
+      topKeywords: g('KEYWORDS').split(',').map(k => k.trim()).filter(Boolean),
+      revNew: g('REV_NEW'), revEst: g('REV_EST'), listings1k: g('LISTINGS_1K'),
+    });
+  }
+  return niches;
+}
+
+function parseOneProduct(text) {
+  // Supports both ===PRODUCT=== and ===P1=== markers
+  let s = text.indexOf('===PRODUCT===');
+  let e = text.indexOf('===END===');
+  if (s < 0) {
+    // Try ===P1=== style
+    for (let i = 1; i <= 3; i++) {
+      s = text.indexOf('===P' + i + '===');
+      if (s >= 0) { e = text.indexOf('===END' + i + '==='); break; }
+    }
+  }
+  if (s < 0) return null;
+  const raw = text.slice(s, e > s ? e + 10 : s + 2000);
+
+  // Single-line field
+  const g = k => {
+    const m = raw.match(new RegExp('^' + k + ':\\s*(.+)$', 'mi'));
+    return m ? m[1].trim() : '';
+  };
+
+  // Multi-line block — stops at the next ALL-CAPS field name or end marker
+  const gBlock = k => {
+    const m = raw.match(new RegExp('^' + k + ':\\s*\\n([\\s\\S]*?)(?=\\n[A-Z][A-Z_]+:|===END|$)', 'mi'));
+    if (m) return m[1].trim();
+    const m2 = raw.match(new RegExp('^' + k + ':\\s*\\n([\\s\\S]+)', 'mi'));
+    return m2 ? m2[1].slice(0, 1000).trim() : '';
+  };
+
+  const name = g('NAME');
+  if (!name) return null;
+
+  return {
+    id:              Date.now() + Math.random(),
+    name,
+    title:           g('TITLE'),
+    seoKw:           g('KEYWORDS'),
+    price:           g('PRICE') || '$9.99',
+    icon:            g('ICON') || '🛍',
+    colors:          g('COLORS') || '#FFF0F7,#FF6FA6,#4A0030',
+    productType:     SHOP ? SHOP.productType : 'digital',
+    niche:           SHOP ? SHOP.nicheName : '',
+    shopName:        SHOP ? SHOP.shopName : '',
+    pages:           g('PAGES'),
+    fileFormat:      g('FILE_FORMAT'),
+    printifyProduct: g('PRINTIFY_PRODUCT'),
+    printDesign:     g('PRINT_DESIGN'),
+    desc:            gBlock('DESCRIPTION'),
+    tags:            g('TAGS'),
+    category:        g('CATEGORY'),
+    upsell:          g('UPSELL'),
+    canvaBrief:      gBlock('CANVA_BRIEF') || g('CANVA_BRIEF'),
+    canvaDesignUrl:  null,
+  };
+}
+
+function parseIdeas(text) {
+  const ideas = [];
+  for (let i = 1; i <= 8; i++) {
+    const s = text.indexOf('---IDEA' + i + '---');
+    const e = text.indexOf('---END' + i + '---');
+    if (s < 0) continue;
+    const blk = text.slice(s, e > s ? e : s + 500);
+    const g = k => { const m = blk.match(new RegExp('^' + k + ':\\s*(.+)$', 'mi')); return m ? m[1].trim() : ''; };
+    const title = g('TITLE');
+    if (!title) continue;
+    ideas.push({
+      id: Date.now() + i * 997 + Math.floor(Math.random() * 999),
+      title, icon: g('ICON') || '💡', desc: g('DESC'),
+      keywords: g('KEYWORDS'), price: g('PRICE'), difficulty: g('DIFFICULTY'),
+    });
+  }
+  return ideas;
+}
+
+// ── WORKERS ─────────────────────────────────────────────────────
+function setW(id, status) {
+  wStatus[id] = status;
+  renderWorkerList();
+}
+
+async function runProducts() {
+  setW('products', 'working');
+  clearErr();
+  const added = [];
+
+  for (let n = 1; n <= 3; n++) {
+    setStatus('🛍 Product Studio: creating product ' + n + ' of 3...', true);
+    let success = false;
+
+    // Try up to 2 times per product
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        if (attempt === 2) {
+          setStatus('🔄 Retrying product ' + n + '...', true);
+          await delay(4000);
+        }
+        const txt  = await callAI(productPrompt(SHOP, [...PRODUCTS, ...added], n), 950);
+        const prod = parseOneProduct(txt);
+        if (prod) {
+          added.push(prod);
+          const newIdx = PRODUCTS.length;
+          PRODUCTS.push(prod);
+          saveAll();
+          renderProducts();
+          success = true;
+          // Auto-post to Etsy in background — don't await so it doesn't block next product
+          autoPostToEtsy(prod, newIdx);
+          break;
+        }
+      } catch(err) {
+        if (attempt === 2) {
+          console.error('Product', n, 'failed after 2 attempts:', err.message);
+          showErr('Product ' + n + ' error: ' + err.message);
+        }
+      }
+    }
+
+    if (n < 3) await delay(1200);
+  }
+
+  if (added.length > 0) {
+    setW('products', 'done');
+    clearErr();
+    setStatus('✅ ' + added.length + ' new products added — ' + PRODUCTS.length + ' total.', false);
+    toast('✅ ' + added.length + ' product' + (added.length > 1 ? 's' : '') + ' created!');
+  } else {
+    setW('products', 'error');
+    toast('❌ Product Studio failed — see error above');
+  }
+}
+
+async function runIdeas() {
+  setW('ideas', 'working');
+  try {
+    const txt  = await callAI(ideasPrompt(SHOP), 800);
+    const list = parseIdeas(txt);
+    if (list.length) {
+      IDEAS = [...IDEAS, ...list].slice(-32);
+      saveAll();
+      renderIdeas();
+      setW('ideas', 'done');
+    } else {
+      setW('ideas', 'error');
+    }
+  } catch(err) {
+    setW('ideas', 'error');
+    console.error('Ideas error:', err.message);
+  }
+}
+
+async function runBrand() {
+  setW('brand', 'working');
+  try {
+    const txt = await callAI(brandPrompt(SHOP), 800);
+    BRAND = txt;
+    localStorage.setItem('v11_brand', BRAND);
+    renderBrandContent(BRAND);
+    setW('brand', 'done');
+    // Extract logo brief and show logo prompt
+    const logoMatch = txt.match(/LOGO_BRIEF:\s*\n([\s\S]*?)(?=\n[A-Z_]+:|$)/mi);
+    if (logoMatch) {
+      const brief = logoMatch[1].trim();
+      SHOP.logoBrief = brief;
+      localStorage.setItem('v11_shop', JSON.stringify(SHOP));
+      showLogoBriefInPanel(brief);
+    }
+  } catch(err) {
+    setW('brand', 'error');
+    console.error('Brand error:', err.message);
+  }
+}
+
+// ── MAIN CYCLE ──────────────────────────────────────────────────
+async function runCycle(isFirstRun) {
+  if (isRunning || !KEY || !SHOP) return;
+  isRunning = true;
+  CYCLE++;
+  saveAll();
+  document.getElementById('sCyc').textContent = CYCLE;
+
+  setStatus('🚀 Cycle ' + CYCLE + ' — generating products and ideas for "' + SHOP.nicheName + '"...', true);
+
+  // Products and ideas run every cycle
+  await runProducts();
+  await delay(1200);
+  await runIdeas();
+
+  // Brand only runs on first cycle
+  if (isFirstRun && !BRAND) {
+    await delay(1200);
+    await runBrand();
+  }
+
+  isRunning = false;
+  setStatus('✅ Cycle ' + CYCLE + ' done. ' + PRODUCTS.length + ' products total. Next run in 90 min.', false);
+  scheduleNext();
+}
+
+async function runAllNow() {
+  if (isRunning || !KEY || !SHOP) {
+    toast('Workers are busy or not set up yet');
+    return;
+  }
+  await runCycle(false);
+}
+
+function scheduleNext() {
+  if (nextTimer) clearTimeout(nextTimer);
+  if (countInt) clearInterval(countInt);
+  let mins = 90;
+  const sN = document.getElementById('sN');
+  if (sN) sN.textContent = mins + 'm';
+  countInt = setInterval(() => {
+    mins--;
+    if (sN) sN.textContent = Math.max(0, mins) + 'm';
+    if (mins <= 0) clearInterval(countInt);
+  }, 60000);
+  nextTimer = setTimeout(() => { clearInterval(countInt); runCycle(false); }, 90 * 60 * 1000);
+}
+
+// ── NICHE RESEARCH ──────────────────────────────────────────────
+async function researchNiches() {
+  if (!KEY) return;
+  setStatus('🔍 Researching trending niches...', true);
+  document.getElementById('npState').innerHTML =
+    '<div class="np-spin"><div class="spinner"></div><div class="np-spin-txt">Scanning Etsy trends — ~20 seconds ✨</div></div>';
+  try {
+    const txt    = await callAI(nichePrompt(), 1400);
+    const niches = parseNiches(txt);
+    if (!niches.length) throw new Error('No niches found in response');
+    renderNiches(niches);
+    setStatus('✅ Found ' + niches.length + ' trending niches — click one to select!', false);
+  } catch(err) {
+    document.getElementById('npState').innerHTML =
+      '<div class="np-spin" style="gap:14px">'
+      + '<div class="np-spin-txt" style="color:var(--rose2)">❌ ' + err.message + '</div>'
+      + '<button class="np-btn" onclick="researchNiches()">Try Again</button>'
+      + '</div>';
+  }
+}
+
+function renderNiches(niches) {
+  const state = document.getElementById('npState');
+  state.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'niche-grid';
+  niches.forEach((n, i) => {
+    const card = document.createElement('div');
+    card.className = 'nc';
+    card.id = 'nc_' + i;
+    card.onclick = () => selectNiche(n, i, niches.length);
+    const kws = (n.topKeywords || []).slice(0, 4).map(k => '<span class="nc-tag">' + k + '</span>').join('');
+    const gap  = n.marketGap ? '<div style="font-size:.6rem;color:var(--lav2);font-style:italic;margin-bottom:7px">🎯 ' + n.marketGap + '</div>' : '';
+    card.innerHTML =
+      '<div class="nc-top">'
+        + '<span class="nc-icon">' + n.icon + '</span>'
+        + '<div>'
+          + '<div class="nc-name">' + n.name + '</div>'
+          + '<div class="nc-meta">' + (n.type === 'digital' ? '📥 Digital' : '🖨 POD') + ' · ' + (n.competition || '') + ' competition · ' + (n.avgPrice || '') + '</div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="nc-desc">' + (n.desc || '') + '</div>'
+      + '<div class="nc-why">💡 ' + (n.why || '') + '</div>'
+      + gap
+      + '<div class="nc-rev">'
+        + '<div class="nc-rev-title">💰 Revenue Estimates</div>'
+        + '<div class="nr-row"><span class="nr-l">Months 1–3</span><span class="nr-v">' + (n.revNew || '—') + '/mo</span></div>'
+        + '<div class="nr-row gold"><span class="nr-l">Months 6–12</span><span class="nr-v">' + (n.revEst || '—') + '/mo</span></div>'
+        + '<div class="nr-row"><span class="nr-l">Listings to $1k/mo</span><span class="nr-v">~' + (n.listings1k || '—') + '</span></div>'
+      + '</div>'
+      + '<div class="nc-tags">' + kws + '</div>';
+    grid.appendChild(card);
+  });
+  state.appendChild(grid);
+}
+
+function selectNiche(niche, idx, total) {
+  selNiche = niche;
+  for (let i = 0; i < total; i++) {
+    const c = document.getElementById('nc_' + i);
+    if (c) c.classList.toggle('sel', i === idx);
+  }
+  document.getElementById('cbName').textContent = niche.icon + ' ' + niche.name + ' — ' + niche.shopName;
+  document.getElementById('cbDesc').textContent =
+    niche.desc + ' | Revenue: ' + (niche.revNew || '—') + ' → ' + (niche.revEst || '—') + '/mo';
+  document.getElementById('confirmBar').classList.add('show');
+}
+
+function deselectNiche() {
+  selNiche = null;
+  document.querySelectorAll('.nc').forEach(c => c.classList.remove('sel'));
+  document.getElementById('confirmBar').classList.remove('show');
+}
+
+function confirmNiche() {
+  if (!selNiche) return;
+  document.getElementById('nichePicker').style.display = 'none';
+  document.getElementById('brandSetup').style.display = 'block';
+  document.getElementById('bs-shopname').value = selNiche.shopName || '';
+  selectType(selNiche.type || 'digital');
+}
+
+// ── BRAND SETUP ─────────────────────────────────────────────────
+function selectType(type) {
+  bsType = type;
+  const d = document.getElementById('bs-digital');
+  const p = document.getElementById('bs-pod');
+  if (!d || !p) return;
+  d.style.borderColor = type === 'digital' ? 'var(--rose2)' : 'var(--border2)';
+  d.style.background  = type === 'digital' ? 'rgba(255,111,166,.08)' : 'transparent';
+  p.style.borderColor = type === 'pod'     ? 'var(--rose2)' : 'var(--border2)';
+  p.style.background  = type === 'pod'     ? 'rgba(255,111,166,.08)' : 'transparent';
+}
+
+function pickVibe(el) {
+  document.querySelectorAll('.vibe-opt').forEach(v => v.classList.remove('picked'));
+  el.classList.add('picked');
+  bsVibe = el.dataset.vibe;
+}
+
+function launchShop() {
+  const shopName = (document.getElementById('bs-shopname').value || '').trim();
+  if (!shopName) { toast('Please enter a shop name!'); return; }
+  if (!bsType)   { toast('Please pick a product type!'); return; }
+  if (!bsVibe)   { toast('Please pick a brand aesthetic!'); return; }
+
+  const c1 = (document.getElementById('bs-col1').value || '').trim() || '#FF6FA6';
+  const c2 = (document.getElementById('bs-col2').value || '').trim() || '#FFF0F7';
+  const c3 = (document.getElementById('bs-col3').value || '').trim() || '#4A0030';
+
+  SHOP = {
+    nicheName:   selNiche.name,
+    nicheDesc:   selNiche.desc,
+    shopName,
+    productType: bsType,
+    targetBuyer: selNiche.targetBuyer,
+    topKeywords: selNiche.topKeywords || [],
+    icon:        selNiche.icon,
+    brandVibe:   bsVibe,
+    brandColors: c1 + ',' + c2 + ',' + c3,
+  };
+  localStorage.setItem('v11_shop', JSON.stringify(SHOP));
+
+  document.getElementById('brandSetup').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('shopChip').textContent = SHOP.icon + ' ' + SHOP.shopName;
+  document.getElementById('sDot').classList.add('on');
+  // Check if server is already connected
+  if (SERVER_URL) {
+    fetch(SERVER_URL + '/status').then(r => r.json()).then(d => {
+      if (d.connected) updateEtsyBtn(true, d.shopName);
+    }).catch(() => {});
+  }
+
+  renderWorkerList();
+  toast('🎉 ' + shopName + ' is live! Starting workers...');
+
+  // Copy logo generation request to clipboard
+  const logoMsg = 'Generate a Canva logo for my Etsy shop "' + shopName + '". '
+    + 'Niche: ' + SHOP.nicheName + '. Style: ' + bsVibe + '. Colors: ' + c1 + ', ' + c2 + ', ' + c3 + '. '
+    + 'Include the shop name in the logo. Clean, professional, memorable.';
+  navigator.clipboard.writeText(logoMsg).catch(() => {});
+  setTimeout(() => toast('📋 Logo request copied — paste it in the Claude chat to generate your logo!'), 2000);
+
+  setTimeout(() => runCycle(true), 1000);
+}
+
+// ── RENDER ───────────────────────────────────────────────────────
+function renderWorkerList() {
+  const list = document.getElementById('workerList');
+  if (!list) return;
+  list.innerHTML = '';
+  const labels = { idle:'Idle', working:'Working...', done:'Done ✅', error:'Error ❌' };
+  WORKERS.forEach(w => {
+    const st  = wStatus[w.id] || 'idle';
+    const div = document.createElement('div');
+    div.className = 'wc ' + (st === 'working' ? 'wk' : st === 'done' ? 'dn' : st === 'error' ? 'er' : '');
+    div.onclick = () => clickWorker(w.id);
+    div.innerHTML =
+      '<div class="wc-top">'
+        + '<span class="wc-em">' + w.emoji + '</span>'
+        + '<div>'
+          + '<div class="wc-nm" style="color:' + w.color + '">' + w.name + '</div>'
+          + '<div class="wc-rl">' + w.role + '</div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="wc-st ' + st + '"><div class="wdot"></div>' + (labels[st] || 'Idle') + '</div>';
+    list.appendChild(div);
+  });
+}
+
+function renderProducts() {
+  const grid = document.getElementById('prodGrid');
+  if (!grid) return;
+  document.getElementById('sProd').textContent = PRODUCTS.length;
+  if (!PRODUCTS.length) {
+    grid.innerHTML =
+      '<div class="empty">'
+        + '<div class="empty-icon">🛍</div>'
+        + '<div class="empty-title">No products yet</div>'
+        + '<div class="empty-sub">Workers will create listings for "' + (SHOP ? SHOP.nicheName : 'your niche') + '" automatically.</div>'
+      + '</div>';
+    return;
+  }
+  grid.innerHTML = '';
+  [...PRODUCTS].reverse().forEach((p, ri) => {
+    const realIdx = PRODUCTS.length - 1 - ri;
+    const isPOD   = p.productType === 'pod';
+    const card    = document.createElement('div');
+    card.className = 'pcard';
+    card.onclick   = () => openPV(realIdx);
+    const tags     = (p.tags || '').split(',').slice(0, 3);
+    const sub      = isPOD ? (p.printifyProduct || '🖨 POD').split(' ').slice(0,3).join(' ') : (p.pages || '📥 Digital');
+    const tagHtml  = tags.map(t => '<span class="pc-tag">' + t.trim() + '</span>').join('');
+    const seoLine  = p.seoKw ? '<div class="pc-seo">🔍 ' + p.seoKw.split(',').slice(0,2).join(', ') + '</div>' : '';
+    const design   = p.canvaDesignUrl ? '<img src="' + p.canvaDesignUrl + '" style="width:100%;height:100%;object-fit:cover"/><div class="pc-design-badge">✅ Designed</div>' : '<span>' + (p.icon || '🛍') + '</span>';
+    const etsyBadge = p.etsyListingId
+      ? '<span class="etsy-badge live">✅ On Etsy #' + p.etsyListingId + '</span>'
+      : (p.etsyError ? '<span class="etsy-badge error">⚠ Etsy error</span>' : '');
+    card.innerHTML =
+      '<div class="pc-img ' + (p.canvaDesignUrl ? 'has-design' : '') + '">' + design + '</div>'
+      + '<div class="pc-info">'
+        + '<div class="pc-name">' + p.name + '</div>'
+        + '<div class="pc-price">' + p.price + ' · ' + sub + '</div>'
+        + '<div class="pc-tags">' + tagHtml + '</div>'
+        + seoLine
+        + (etsyBadge ? '<div style="margin-top:4px">' + etsyBadge + '</div>' : '')
+        + '<div style="font-size:.5rem;margin-top:3px;color:' + (p.canvaDesignUrl ? 'var(--mint2)' : 'var(--dim)') + ';font-family:JetBrains Mono,monospace">'
+          + (p.canvaDesignUrl ? '✅ Canva design ready' : '🎨 Click to design in Canva')
+        + '</div>'
+      + '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function renderIdeas() {
+  const grid = document.getElementById('ideaGrid');
+  if (!grid) return;
+  document.getElementById('sIdea').textContent = IDEAS.length;
+  if (!IDEAS.length) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">💡</div><div class="empty-title">Ideas loading</div><div class="empty-sub">New ideas for "' + (SHOP ? SHOP.nicheName : 'your niche') + '" generate every cycle.</div></div>';
+    return;
+  }
+  grid.innerHTML = '';
+  [...IDEAS].reverse().forEach(idea => {
+    const card = document.createElement('div');
+    card.className = 'icard';
+    const kws    = (idea.keywords || '').split(',').slice(0, 3);
+    const kwHtml = kws.map(k => '<span class="ikw">' + k.trim() + '</span>').join('');
+    card.innerHTML =
+      '<div class="icard-icon">' + (idea.icon || '💡') + '</div>'
+      + '<div class="icard-title">' + idea.title + '</div>'
+      + '<div class="icard-desc">' + (idea.desc || '') + '</div>'
+      + '<div class="icard-kws">' + kwHtml + '</div>'
+      + '<div class="icard-bottom">'
+        + '<span class="icard-price">' + (idea.price || '') + ' · ' + (idea.difficulty || '') + '</span>'
+        + '<button class="make-btn" data-id="' + idea.id + '">Make this →</button>'
+      + '</div>';
+    card.querySelector('.make-btn').addEventListener('click', () => makeFromIdea(idea.id));
+    grid.appendChild(card);
+  });
+}
+
+function renderBrandContent(text) {
+  const el = document.getElementById('cnt-brand');
+  if (!el) return;
+  el.innerHTML = '';
+  const card = document.createElement('div');
+  card.className = 'rc';
+  const safeText = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  card.innerHTML =
+    '<div class="rc-head" onclick="this.nextElementSibling.classList.toggle(\'o\');this.querySelector(\'.rc-tog\').classList.toggle(\'o\')">'
+      + '<div class="rc-title">🎨 Brand Room — ' + (SHOP ? SHOP.shopName : '') + '</div>'
+      + '<span class="rc-tog o">▼</span>'
+    + '</div>'
+    + '<div class="rc-body o">'
+      + '<div class="rc-text">' + safeText + '</div>'
+      + '<div class="rc-acts">'
+        + '<button class="rcbtn p" id="brandCopyBtn">📋 Copy All</button>'
+        + '<button class="rcbtn dl" id="brandDlBtn">⬇ Download</button>'
+      + '</div>'
+    + '</div>';
+  el.appendChild(card);
+  document.getElementById('brandCopyBtn').onclick = () =>
+    navigator.clipboard.writeText(text).then(() => toast('✅ Brand content copied!'));
+  document.getElementById('brandDlBtn').onclick   = () => dlText(text, 'brand');
+}
+
+function showLogoBriefInPanel(brief) {
+  const sec = document.getElementById('brand-logo-section');
+  if (!sec) return;
+  sec.style.display = 'block';
+  const el = document.getElementById('brand-logo-brief');
+  if (el) { el.textContent = brief; el.style.display = 'block'; el.dataset.brief = brief; }
+}
+
+// ── PRODUCT VIEWER ───────────────────────────────────────────────
+function openPV(idx) {
+  curProd  = idx;
+  editMode = false;
+  const p  = PRODUCTS[idx];
+  if (!p) return;
+  const isPOD = (p.productType || 'digital') === 'pod';
+
+  document.getElementById('pvTitle').textContent = p.name;
+  document.getElementById('pv').classList.add('open');
+
+  // Badges
+  document.getElementById('pvTypeBadge').textContent  = isPOD ? '🖨 Print-on-Demand' : '📥 Digital Download';
+  document.getElementById('pvNicheBadge').textContent = '✦ ' + (p.niche || '');
+  const tlen = (p.title || '').length;
+  document.getElementById('pvSeoBadge').textContent   = (tlen >= 130 ? '🟢 Strong SEO' : tlen >= 100 ? '🟡 Good SEO' : '🔴 Short Title') + ' · ' + tlen + '/140';
+
+  // Fields
+  setF('f-name',     p.name);
+  setF('f-title',    p.title || '');
+  setF('f-seo',      p.seoKw || '');
+  setF('f-price',    p.price || '');
+  setF('f-desc',     p.desc || '');
+  setF('f-category', p.category || '');
+  setF('f-upsell',   p.upsell || '');
+  setF('f-canva',    p.canvaBrief || '');
+
+  // Materials / file details
+  const matLbl = document.getElementById('lbl-materials');
+  if (matLbl) matLbl.textContent = isPOD ? 'Printify Details' : 'File Details';
+  const matVal = isPOD
+    ? [p.printifyProduct ? '🖨 Product: ' + p.printifyProduct : '', p.printDesign ? '🎨 Design: ' + p.printDesign : ''].filter(Boolean).join('\n')
+    : [p.pages ? '📄 ' + p.pages : '', p.fileFormat ? '📁 ' + p.fileFormat : ''].filter(Boolean).join('  ·  ') || 'PDF + PNG, A4 + US Letter';
+  setF('f-materials', matVal);
+
+  // Title char count
+  const ti = document.getElementById('f-title');
+  if (ti) {
+    ti.oninput = () => {
+      const len = ti.value.length;
+      const tl  = document.getElementById('titleLen');
+      const sb  = document.getElementById('pvSeoBadge');
+      if (tl) tl.textContent = len + '/140 chars';
+      if (sb) sb.textContent = (len >= 130 ? '🟢 Strong SEO' : len >= 100 ? '🟡 Good SEO' : '🔴 Short Title') + ' · ' + len + '/140';
+    };
+    const tl = document.getElementById('titleLen');
+    if (tl) tl.textContent = tlen + '/140 chars';
+  }
+
+  // Tags
+  const tagRow = document.getElementById('f-tags');
+  if (tagRow) {
+    tagRow.innerHTML = '';
+    (p.tags || '').split(',').forEach(t => {
+      t = t.trim();
+      if (!t) return;
+      const s = document.createElement('span');
+      s.className = 'tg';
+      s.textContent = t;
+      s.title = 'Click to copy this tag';
+      s.onclick = () => navigator.clipboard.writeText(t).then(() => toast('✅ Tag copied: ' + t));
+      tagRow.appendChild(s);
+    });
+  }
+
+  // Design area
+  const da = document.getElementById('pvDesignArea');
+  if (da) {
+    if (p.canvaDesignUrl) {
+      da.innerHTML = '<img src="' + p.canvaDesignUrl + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px"/>';
+    } else {
+      const icon = da.querySelector('.design-icon');
+      const lbl  = da.querySelector('.design-lbl');
+      if (icon) icon.textContent = p.icon || '🛍';
+      if (lbl)  lbl.textContent  = 'No design yet — click "Open in Canva" to design this product.';
+    }
+  }
+
+  // Printify guide
+  const ppEl   = document.getElementById('pvPrintifyProduct');
+  const pgEl   = document.getElementById('printifyGuide');
+  if (ppEl) ppEl.textContent = isPOD && p.printifyProduct ? '🔍 Search Printify for: ' + p.printifyProduct : '';
+  if (pgEl) pgEl.style.display = isPOD ? 'block' : 'none';
+
+  setViewMode();
+}
+
+function setF(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val || '';
+}
+
+function setViewMode() {
+  editMode = false;
+  document.querySelectorAll('.fv').forEach(el => { el.setAttribute('readonly',''); el.classList.remove('editable'); });
+  const eb  = document.getElementById('editBtn');
+  const eb2 = document.getElementById('editBtn2');
+  const sr  = document.getElementById('saveRow');
+  const par = document.getElementById('pvActsRow');
+  if (eb)  eb.textContent  = '✏️ Edit';
+  if (eb2) eb2.textContent = '✏️ Edit Mode';
+  if (sr)  sr.style.display  = 'none';
+  if (par) par.style.display = 'flex';
+}
+
+function setEditMode() {
+  editMode = true;
+  ['f-name','f-title','f-seo','f-price','f-desc','f-materials','f-category','f-upsell','f-canva'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.removeAttribute('readonly'); el.classList.add('editable'); }
+  });
+  const eb  = document.getElementById('editBtn');
+  const eb2 = document.getElementById('editBtn2');
+  const sr  = document.getElementById('saveRow');
+  const par = document.getElementById('pvActsRow');
+  if (eb)  eb.textContent  = '👁 View';
+  if (eb2) eb2.textContent = '👁 View Mode';
+  if (sr)  sr.style.display  = 'block';
+  if (par) par.style.display = 'none';
+  toast('✏️ Edit mode — change anything, then Save!');
+}
+
+function toggleEdit() { editMode ? setViewMode() : setEditMode(); }
+
+function saveEdits() {
+  if (curProd === null) return;
+  const p        = PRODUCTS[curProd];
+  p.name         = document.getElementById('f-name').value;
+  p.title        = document.getElementById('f-title').value;
+  p.seoKw        = document.getElementById('f-seo').value;
+  p.price        = document.getElementById('f-price').value;
+  p.desc         = document.getElementById('f-desc').value;
+  p.category     = document.getElementById('f-category').value;
+  p.upsell       = document.getElementById('f-upsell').value;
+  p.canvaBrief   = document.getElementById('f-canva').value;
+  PRODUCTS[curProd] = p;
+  saveAll();
+  renderProducts();
+  setViewMode();
+  document.getElementById('pvTitle').textContent = p.name;
+  toast('💾 Edits saved!');
+}
+
+function buildListingText(p) {
+  const isPOD = (p.productType || 'digital') === 'pod';
+  const divider = '═'.repeat(50);
+  const fileSection = isPOD
+    ? 'PRINTIFY PRODUCT:\n' + (p.printifyProduct || '—')
+    + '\n\nPRINT DESIGN:\n' + (p.printDesign || '—')
+    : 'FILE DETAILS:\n' + [p.pages, p.fileFormat].filter(Boolean).join(' · ') || 'PDF + PNG, A4 + US Letter';
+
+  const howTo = isPOD
+    ? 'HOW TO PUBLISH (Print-on-Demand):\n'
+    + '1. Go to printify.com and create a new product\n'
+    + '2. Search for: ' + (p.printifyProduct || 'your product type') + '\n'
+    + '3. Copy the Canva Brief below and design the artwork in Canva\n'
+    + '4. Download as PNG from Canva and upload to Printify as the print file\n'
+    + '5. Set price to ' + p.price + ' and click Sync to Etsy\n'
+    + '6. In Etsy paste the Title, Description, and Tags from above\n'
+    + '7. Publish — Printify handles all printing and shipping automatically'
+    : 'HOW TO PUBLISH (Digital Download):\n'
+    + '1. Copy the Canva Brief below and paste it into Canva AI\n'
+    + '2. Design the product in Canva — edit until it looks perfect\n'
+    + '3. Download from Canva as PDF (Print quality)\n'
+    + '4. Go to Etsy, Shop Manager, Listings, Add a listing\n'
+    + '5. Under Digital files upload your PDF from Canva\n'
+    + '6. Paste the Title, Description, and Tags from above\n'
+    + '7. Set price to ' + p.price + ' and publish\n'
+    + '   Customers receive the file automatically after purchase';
+
+  return '📦 PRODUCT: ' + p.name + '\n' + divider + '\n'
+    + 'SHOP: ' + (p.shopName || '') + '\n'
+    + 'NICHE: ' + (p.niche || '') + '\n'
+    + 'TYPE: ' + (isPOD ? 'Print-on-Demand via Printify' : 'Digital Download — Instant Delivery') + '\n\n'
+    + '════ ETSY LISTING ════════════════════════════════\n\n'
+    + 'TITLE (paste into Etsy Title field — ' + (p.title || '').length + '/140 chars):\n'
+    + (p.title || '⚠ Title not generated — click Edit to add') + '\n\n'
+    + 'PRICE: ' + (p.price || '—') + '\n\n'
+    + 'SEO KEYWORDS IN TITLE:\n' + (p.seoKw || '—') + '\n\n'
+    + 'DESCRIPTION (paste into Etsy Description field):\n'
+    + (p.desc || '⚠ Description not generated — click Edit to add') + '\n\n'
+    + 'TAGS (paste all into Etsy Tags field, comma separated):\n'
+    + (p.tags || '⚠ Tags not generated') + '\n\n'
+    + 'CATEGORY: ' + (p.category || '—') + '\n\n'
+    + fileSection + '\n\n'
+    + 'UPSELL IDEA: ' + (p.upsell || '—') + '\n\n'
+    + '════ CANVA DESIGN BRIEF ═════════════════════════\n'
+    + 'Paste this into Canva AI to design the product:\n\n'
+    + (p.canvaBrief || 'Design a professional Etsy product for: ' + p.name) + '\n\n'
+    + '════ STEP-BY-STEP GUIDE ════════════════════════\n'
+    + howTo;
+}
+
+function copyListing() {
+  if (curProd === null) return;
+  if (editMode) saveEdits();
+  navigator.clipboard.writeText(buildListingText(PRODUCTS[curProd]))
+    .then(() => toast('✅ Full listing copied! Paste into Etsy.'));
+}
+
+function downloadListing() {
+  if (curProd === null) return;
+  const p = PRODUCTS[curProd];
+  dlText(buildListingText(p), (p.name || 'listing').replace(/[^a-zA-Z0-9]/g, '_'));
+}
+
+function openInCanva() {
+  if (curProd === null) { toast('Open a product first!'); return; }
+  const p = PRODUCTS[curProd];
+  window.open('https://www.canva.com', '_blank');
+  showCanvaModal(p);
+}
+
+function showCanvaModal(p) {
+  const existing = document.getElementById('canvaModal');
+  if (existing) existing.remove();
+  const brief = p.canvaBrief || 'Design a professional Etsy product: ' + p.name + '. Niche: ' + (SHOP ? SHOP.nicheName : '') + '. Make it beautiful and professional.';
+  const ov = document.createElement('div');
+  ov.id = 'canvaModal';
+  ov.className = 'ov open';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.maxWidth = '520px';
+
+  const h = document.createElement('h3');
+  h.textContent = '🎨 Design "' + p.name + '" in Canva';
+  modal.appendChild(h);
+
+  const sub = document.createElement('p');
+  sub.style.cssText = 'color:var(--mint2);font-weight:800;font-size:.76rem;margin-bottom:6px';
+  sub.textContent = '✅ Canva opened in a new tab!';
+  modal.appendChild(sub);
+
+  const inst = document.createElement('p');
+  inst.innerHTML = 'In Canva: click <strong>Create a design</strong> → pick A4 or Square → use <strong>Magic Design or AI</strong> → paste this brief:';
+  modal.appendChild(inst);
+
+  const ta = document.createElement('textarea');
+  ta.value = brief;
+  ta.style.cssText = 'width:100%;background:var(--card);border:2px solid var(--lav2);border-radius:9px;padding:10px;font-family:JetBrains Mono,monospace;font-size:.65rem;color:var(--lav2);line-height:1.7;height:130px;margin:10px 0;resize:vertical;outline:none;box-sizing:border-box';
+  modal.appendChild(ta);
+
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px';
+
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'mb-s';
+  copyBtn.style.flex = '1';
+  copyBtn.textContent = '📋 Copy Brief for Canva';
+  copyBtn.onclick = () => navigator.clipboard.writeText(ta.value).then(() => toast('✅ Brief copied — paste into Canva AI!'));
+  row.appendChild(copyBtn);
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'mb-c';
+  closeBtn.textContent = 'Close';
+  closeBtn.onclick = () => ov.remove();
+  row.appendChild(closeBtn);
+  modal.appendChild(row);
+
+  const tip = document.createElement('div');
+  tip.style.cssText = 'margin-top:12px;padding:10px;background:rgba(255,111,166,.07);border-radius:8px;font-size:.65rem;color:var(--muted);line-height:1.7';
+  const chatMsg = 'Generate a Canva product design for my Etsy shop. Product: ' + p.name + '. Brief: ' + brief.slice(0, 150);
+  const askBtn  = document.createElement('button');
+  askBtn.className = 'mb-s';
+  askBtn.style.cssText = 'width:100%;margin-top:8px;font-size:.68rem';
+  askBtn.textContent = '💬 Copy message to ask Claude to design it';
+  askBtn.onclick = () => navigator.clipboard.writeText(chatMsg).then(() => toast('✅ Message copied — paste it in the chat!'));
+  tip.innerHTML = '<strong style="color:var(--rose2)">Or ask Claude to design it for you!</strong><br>Close this and paste the message below into the chat — Claude will generate Canva designs right here.';
+  tip.appendChild(askBtn);
+  modal.appendChild(tip);
+
+  ov.appendChild(modal);
+  document.body.appendChild(ov);
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+}
+
+function openPrintify() {
+  if (curProd === null) return;
+  const p = PRODUCTS[curProd];
+  window.open('https://printify.com', '_blank');
+  if (p.printifyProduct) toast('🖨 Printify opened! Search for: ' + p.printifyProduct);
+}
+
+function closePV() {
+  document.getElementById('pv').classList.remove('open');
+  curProd = null;
+  editMode = false;
+}
+
+// ── MAKE FROM IDEA ────────────────────────────────────────────────
+async function makeFromIdea(ideaId) {
+  const idea = IDEAS.find(x => x.id == ideaId);
+  if (!idea) { toast('Idea not found'); return; }
+  if (!KEY || !SHOP) { toast('Need API key and shop first!'); return; }
+
+  toast('🛍 Creating listing from: ' + idea.title);
+  setW('products', 'working');
+  clearErr();
+
+  const prompt = productPrompt(
+    { ...SHOP, topKeywords: [idea.title, ...(SHOP.topKeywords || [])].slice(0, 6) },
+    PRODUCTS,
+    1
+  );
+
+  try {
+    const txt  = await callAI(prompt, 950);
+    const prod = parseOneProduct(txt);
+    if (prod) {
+      prod.name = idea.title; // Keep the idea title
+      PRODUCTS.push(prod);
+      saveAll();
+      renderProducts();
+      setW('products', 'done');
+      showTab('products');
+      toast('✅ Listing created from idea!');
+    } else {
+      setW('products', 'error');
+      toast('⚠ Product was generated but format was off — check Products tab');
+    }
+  } catch(err) {
+    setW('products', 'error');
+    showErr('Make from idea failed: ' + err.message);
+  }
+}
+
+// ── TABS & NAVIGATION ─────────────────────────────────────────────
+function showTab(id) {
+  const ids = ['products', 'ideas', 'brand'];
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('on', ids[i] === id));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  const el = document.getElementById('panel-' + id);
+  if (el) el.classList.add('on');
+}
+
+function clickWorker(id) {
+  if (id === 'products') showTab('products');
+  else if (id === 'ideas') showTab('ideas');
+  else if (id === 'brand') showTab('brand');
+}
+
+// ── LOGO ──────────────────────────────────────────────────────────
+function generateLogo() {
+  const briefEl = document.getElementById('brand-logo-brief');
+  const brief   = (briefEl && briefEl.dataset.brief) || briefEl?.textContent || ('Professional Etsy shop logo for "' + (SHOP?.shopName || 'my shop') + '". Niche: ' + (SHOP?.nicheName || '') + '.');
+  const msg     = 'Generate a Canva logo for my Etsy shop. Brief: ' + brief;
+  navigator.clipboard.writeText(msg).then(() =>
+    toast('📋 Logo request copied!\nPaste it in this Claude chat — I will generate logo options for you!')
+  );
+}
+
+function copyLogoBrief() {
+  const el    = document.getElementById('brand-logo-brief');
+  const brief = el ? (el.dataset.brief || el.textContent) : '';
+  if (!brief) { toast('Run the Brand Room first!'); return; }
+  navigator.clipboard.writeText(brief).then(() => toast('✅ Logo brief copied — paste into Canva AI!'));
+}
+
+// ── RESET / CHANGE NICHE ──────────────────────────────────────────
+function resetAll() {
+  document.getElementById('confirmResetOv').classList.add('open');
+}
+
+function doReset() {
+  document.getElementById('confirmResetOv').classList.remove('open');
+
+  // Clear storage (keep key)
+  ['v11_shop','v11_prods','v11_ideas','v11_brand','v11_cycle'].forEach(k => localStorage.removeItem(k));
+
+  // Clear memory
+  SHOP = null; PRODUCTS = []; IDEAS = []; BRAND = ''; CYCLE = 0;
+  Object.keys(wStatus).forEach(k => wStatus[k] = 'idle');
+  isRunning = false;
+  bsType = null; bsVibe = null; selNiche = null;
+  if (nextTimer) clearTimeout(nextTimer);
+  if (countInt)  clearInterval(countInt);
+
+  // Reset UI
+  ['app','brandSetup'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('nichePicker').style.display = 'flex';
+  document.getElementById('shopChip').textContent = '🔍 No shop yet';
+  document.getElementById('sCyc').textContent  = '0';
+  document.getElementById('sProd').textContent = '0';
+  document.getElementById('sIdea').textContent = '0';
+  document.getElementById('confirmBar').classList.remove('show');
+  document.getElementById('npState').innerHTML =
+    '<div class="np-spin"><div class="spinner"></div><div class="np-spin-txt">Researching new niches...</div></div>';
+
+  setStatus('🔍 Finding new niches...', true);
+  researchNiches();
+}
+
+// ── ERROR DISPLAY ─────────────────────────────────────────────────
+function showErr(msg) {
+  const ep = document.getElementById('errPanel');
+  if (!ep) return;
+  const m = msg.toLowerCase();
+  let advice;
+  if (m.includes('401') || m.includes('invalid x-api-key') || m.includes('authentication')) {
+    advice = '🔑 <strong>API key issue.</strong> Click "API Key" in the top bar and re-enter your key from console.anthropic.com. Make sure it starts with sk-ant-';
+  } else if (m.includes('credit') || m.includes('balance') || m.includes('billing')) {
+    advice = '💳 <strong>Credits ran out.</strong> Go to console.anthropic.com, Billing section, and add $5 — that is roughly 50 more runs.';
+  } else if (m.includes('529') || m.includes('overload') || m.includes('rate limit') || m.includes('too many')) {
+    advice = '⏳ <strong>Anthropic servers are busy.</strong> Wait 2-3 minutes, then click "Run All Workers Now" to retry.';
+  } else if (m.includes('model')) {
+    advice = '🤖 <strong>Model error.</strong> This is a bug — please let me know and I will fix it.';
+  } else {
+    advice = '🔄 Click "Run All Workers Now" to retry. If it keeps failing, re-enter your API key.';
+  }
+  ep.style.display = 'block';
+  ep.innerHTML = '<strong style="color:var(--rose2)">⚠ Error: ' + msg.slice(0, 100) + '</strong><br><br>' + advice;
+}
+
+function clearErr() {
+  const ep = document.getElementById('errPanel');
+  if (ep) ep.style.display = 'none';
+}
+
+// ── UTILITIES ─────────────────────────────────────────────────────
+function dlText(text, name) {
+  const a   = document.createElement('a');
+  a.href    = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+  a.download = (name || 'output').replace(/[^a-zA-Z0-9_-]/g, '_') + '.txt';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => document.body.removeChild(a), 100);
+  toast('⬇ Downloaded!');
+}
+
+function setStatus(txt, pulse) {
+  const el  = document.getElementById('stxt');
+  const dot = document.getElementById('ldot');
+  if (el)  el.textContent = txt;
+  if (dot) dot.classList.toggle('p', !!pulse);
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+// ── KEY & SETUP MODALS ────────────────────────────────────────────
+function openKeyModal()  { document.getElementById('keyOv').classList.add('open'); }
+function closeKeyModal() { document.getElementById('keyOv').classList.remove('open'); }
+
+function saveKey() {
+  const v = (document.getElementById('keyIn').value || '').trim();
+  if (!v) { closeKeyModal(); return; }
+  if (!v.startsWith('sk-')) { toast('Key should start with sk-ant-'); return; }
+  KEY = v;
+  localStorage.setItem('v11_key', KEY);
+  document.getElementById('sDot').classList.add('on');
+  closeKeyModal();
+  if (SHOP) {
+    startUp();
+  } else {
+    researchNiches();
+  }
+}
+
+function startUp() {
+  document.getElementById('sDot').classList.add('on');
+  document.getElementById('shopChip').textContent = (SHOP.icon || '✦') + ' ' + SHOP.shopName;
+  renderWorkerList();
+  renderProducts();
+  renderIdeas();
+  if (BRAND) {
+    renderBrandContent(BRAND);
+    const logoMatch = BRAND.match(/LOGO_BRIEF:\s*\n([\s\S]*?)(?=\n[A-Z_]+:|$)/mi);
+    if (logoMatch) showLogoBriefInPanel(logoMatch[1].trim());
+    const sec = document.getElementById('brand-logo-section');
+    if (sec) sec.style.display = 'block';
+  }
+  if (PRODUCTS.length > 0) {
+    setStatus('✅ "' + SHOP.shopName + '" loaded — ' + PRODUCTS.length + ' products. Auto-runs every 90 min.', false);
+    scheduleNext();
+  } else {
+    setStatus('🚀 Starting first run for "' + SHOP.shopName + '"...', true);
+    setTimeout(() => runCycle(true), 600);
+  }
+}
+
+// ── ETSY SERVER CONNECTION ────────────────────────────────────────
+function openEtsyModal() {
+  const input = document.getElementById('serverUrlIn');
+  if (input && SERVER_URL) input.value = SERVER_URL;
+  document.getElementById('etsyOv').classList.add('open');
+}
+function closeEtsyModal() {
+  document.getElementById('etsyOv').classList.remove('open');
+}
+
+async function testAndSaveServer() {
+  const input = document.getElementById('serverUrlIn');
+  const url   = (input.value || '').trim().replace(/\/$/, '');
+  const msg   = document.getElementById('etsyStatusMsg');
+
+  if (!url) { msg.textContent = 'Please enter your Render server URL'; msg.style.color = 'var(--rose2)'; return; }
+
+  msg.textContent = '🔄 Testing connection...';
+  msg.style.color = 'var(--muted)';
+
+  try {
+    const res  = await fetch(url + '/status');
+    const data = await res.json();
+
+    if (data.connected) {
+      SERVER_URL = url;
+      localStorage.setItem('v11_server', SERVER_URL);
+      updateEtsyBtn(true, data.shopName);
+      msg.textContent = '✅ Connected to shop: ' + (data.shopName || data.shopId);
+      msg.style.color = 'var(--mint2)';
+      setTimeout(closeEtsyModal, 1500);
+      toast('✅ Etsy shop connected! New listings will auto-post as drafts.');
+    } else {
+      msg.textContent = '⚠ Server found but not connected to Etsy. Visit ' + url + '/auth to connect.';
+      msg.style.color = 'var(--gold)';
+      // Open the auth link automatically
+      setTimeout(() => window.open(url + '/auth', '_blank'), 1000);
+    }
+  } catch(err) {
+    msg.textContent = '❌ Cannot reach server: ' + err.message + '. Check your Render URL.';
+    msg.style.color = 'var(--rose2)';
+  }
+}
+
+function updateEtsyBtn(connected, shopName) {
+  const btn = document.getElementById('etsyConnectBtn');
+  if (!btn) return;
+  if (connected) {
+    btn.textContent = '🛍 Etsy: ' + (shopName || 'Connected');
+    btn.classList.add('connected');
+  } else {
+    btn.textContent = '🛍 Connect Etsy';
+    btn.classList.remove('connected');
+  }
+}
+
+// Post a single product to Etsy as a draft
+async function postToEtsy(prod) {
+  if (!SERVER_URL) return { success: false, error: 'No server connected' };
+  try {
+    const res  = await fetch(SERVER_URL + '/listing', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        title:       prod.title,
+        description: prod.desc,
+        price:       prod.price,
+        tags:        prod.tags,
+        productType: prod.productType || 'digital',
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Etsy post failed');
+    return { success: true, listing_id: data.listing_id, url: data.url };
+  } catch(err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// Called after a product is created — auto-post to Etsy if server connected
+async function autoPostToEtsy(prod, idx) {
+  if (!SERVER_URL) return; // No server — skip silently
+  setStatus('🛍 Posting "' + prod.name + '" to Etsy as draft...', true);
+  const result = await postToEtsy(prod);
+  if (result.success) {
+    PRODUCTS[idx].etsyListingId = result.listing_id;
+    PRODUCTS[idx].etsyUrl       = result.url;
+    saveAll();
+    renderProducts();
+    toast('✅ Draft posted to Etsy! Open Etsy Shop Manager to review and publish.');
+    setStatus('✅ Draft listing created in your Etsy shop!', false);
+  } else {
+    PRODUCTS[idx].etsyError = result.error;
+    saveAll();
+    renderProducts();
+    console.error('Etsy post error:', result.error);
+    // Don't block the user — just log it, they can still copy the listing manually
+  }
+}
+
+// Manual post button in product viewer
+async function manualPostToEtsy() {
+  if (curProd === null) return;
+  const p = PRODUCTS[curProd];
+  if (p.etsyListingId) {
+    // Already posted — open it
+    window.open(p.etsyUrl || 'https://www.etsy.com/your/shops/me/tools/listings', '_blank');
+    return;
+  }
+  if (!SERVER_URL) {
+    openEtsyModal();
+    return;
+  }
+  const btn = document.getElementById('pvEtsyBtn');
+  if (btn) { btn.textContent = '⏳ Posting...'; btn.disabled = true; }
+  const result = await postToEtsy(p);
+  if (result.success) {
+    PRODUCTS[curProd].etsyListingId = result.listing_id;
+    PRODUCTS[curProd].etsyUrl       = result.url;
+    saveAll();
+    renderProducts();
+    if (btn) { btn.textContent = '✅ View on Etsy'; btn.disabled = false; btn.onclick = () => window.open(result.url, '_blank'); }
+    toast('✅ Draft posted! Review it in Etsy Shop Manager → Drafts.');
+  } else {
+    if (btn) { btn.textContent = '🛍 Post to Etsy'; btn.disabled = false; }
+    toast('❌ Etsy post failed: ' + result.error);
+  }
+}
+
+// ── INITIALISE ────────────────────────────────────────────────────
+(function init() {
+  if (KEY) document.getElementById('sDot').classList.add('on');
+
+  // TheChartLab niche is permanently locked — auto-set SHOP if not already set
+  if (!SHOP) {
+    const cfg = getShopConfig();
+    SHOP = cfg;
+    localStorage.setItem('v11_shop', JSON.stringify(SHOP));
+  }
+
+  if (SHOP) {
+    // Shop exists — go straight to app
+    ['nichePicker','brandSetup'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('app').style.display = 'flex';
+    if (KEY) {
+      startUp();
+    } else {
+      // Show data even without key
+      renderWorkerList(); renderProducts(); renderIdeas();
+      if (BRAND) renderBrandContent(BRAND);
+      document.getElementById('shopChip').textContent = (SHOP.icon || '✦') + ' ' + SHOP.shopName;
+      setStatus('🔑 Enter your API key to generate more products!', false);
+      setTimeout(openKeyModal, 1000);
+    }
+  } else if (KEY) {
+    researchNiches();
+  } else {
+    document.getElementById('npState').querySelector('.np-spin-txt').textContent =
+      'Connect your API key to start!';
+    setTimeout(openKeyModal, 900);
+  }
+
+  // Event listeners
+  document.getElementById('keyOv').addEventListener('click', e => { if (e.target.id === 'keyOv') closeKeyModal(); });
+  document.getElementById('etsyOv').addEventListener('click', e => { if (e.target.id === 'etsyOv') closeEtsyModal(); });
+  document.getElementById('keyIn').addEventListener('keydown', e => { if (e.key === 'Enter') saveKey(); });
+  document.getElementById('viewer') && document.getElementById('viewer').addEventListener('click', e => { if (e.target.id === 'viewer') closePV(); });
+})();
+
+
+
+
+</script>
+</body>
+</html>
